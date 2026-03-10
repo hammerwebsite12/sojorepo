@@ -4,9 +4,13 @@ If you have updated your Steam client today 3/10/26 and are noticing that games 
 THE FIX:
 To restore your library and fix the "missing games" bug, follow these steps:
 
-1️⃣ Open Steam and go to Settings.
-2️⃣ Select the Downloads tab.
-3️⃣ Click Clear Download Cache.
-4️⃣ Steam will restart.
+1️⃣  Open Steam and go to Settings.
+2️⃣  Select the Downloads tab.
+3️⃣  Click Clear Download Cache.
+4️⃣  Steam will restart.
 
 After the restart, your games should reappear, and the "Play" buttons will be restored! ✅
+
+there is a video tutorial for clearing download cache here too please watch:
+
+https://youtu.be/Cn8420_a9R0?si=YI1COdY6EYH_-TwI
