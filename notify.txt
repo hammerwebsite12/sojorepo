@@ -1,10 +1,12 @@
-⚠️ URGENT: DO NOT UPDATE STEAM ⚠️
-STOP! Do not update your Steam client. The latest update will BREAK the current unlock.
+⚠️ IMPORTANT UPDATE: MISSING GAMES OR PURCHASE ERRORS ⚠️
+If you have updated your Steam client today 3/10/26 and are noticing that games are missing from your library or showing up as "Purchase" instead of "Play," you are not alone! This is a known issue caused by the latest app update.
 
-If you have already updated, wait for the fix. I will post a guide shortly on how to downgrade to the last working version.
+THE FIX:
+To restore your library and fix the "missing games" bug, follow these steps:
 
-Last Working Version: 1769025840
+1️⃣ Open Steam and go to Settings.
+2️⃣ Select the Downloads tab.
+3️⃣ Click Clear Download Cache.
+4️⃣ Steam will restart.
 
-Status: Fix / Downgrade guide incoming.
-
-Stay on the current version to keep your access!
+After the restart, your games should reappear, and the "Play" buttons will be restored! ✅
