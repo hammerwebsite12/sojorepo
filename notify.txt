@@ -14,3 +14,8 @@ After the restart, your games should reappear, and the "Play" buttons will be re
 there is a video tutorial for clearing download cache here too please watch:
 
 https://youtu.be/Cn8420_a9R0?si=YI1COdY6EYH_-TwI
+
+🔄 STILL SEEING THE ERROR?
+If the issue persists, simply repeat the process. We are currently investigating and will push a permanent server-side fix soon.
+
+Thanks for your patience! 🙏
