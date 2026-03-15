@@ -1,4 +1,4 @@
-🛠️ Steam NOTE OPENING Update Fix (Hammer 3.4)
+🛠️ STEAM NOT OPENING  Fix (Hammer 3.4)
 Hammer App 3.4: Open and click Unlock Mode 2 (Ignore any errors).
 
 Close Hammer: Exit the app.
