@@ -1,5 +1,6 @@
 🛠️ Steam Update ERROR Loop Fix 
 Stuck on a "Steam Updating" loop or steam not booting/starting? Here is the quick fix:
+REFERENCE VIDEO TUTORIAL : https://streamable.com/i8rq38
 
 Open Hammer App → Click Unlock Mode 2 🔓
 
