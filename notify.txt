@@ -1,23 +1,14 @@
+🛠️ Steam Update ERROR Loop Fix 
+Stuck on a "Steam Updating" loop or steam not booting/starting? Here is the quick fix:
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-✅ Fixes "Purchase" & Missing Game Errors (from latest update) 
-The Full Ultra-Short Post:
-🔨 3.4 Update is LIVE! If your app is still in 3.3 it is the right time to update
-This version fixes the "Missing Game" and "Purchase" button errors from the latest 1773099986 client update.
-What’s New:
-✅ Error Fix: Resolves "Purchase instead of Play" bugs.
-✅ Force Update: New modes for 1 & 2.
-✅ UI Refresh: Now with fully labeled switches.
-✅ Direct Alerts: New in-app news system.
-📩 READY TO UPDATE?
-Just reach us out via Messenger for the 3.4!
-(reseller/page)
+Open Hammer App → Click Unlock Mode 2 🔓
 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ignore errors → Open Steam
 
-want to Play Resident Evil 9: Requiem now? 🧟
+Steam Settings > Downloads > Clear Download Cache 🧹
 
-Download the game using Hammer today and message our page once finished to secure your account slot for only ₱350.
+Restart Steam
 
-📩 Inquire now and start playing!
+Close & Re-open Hammer → Click the Red Circle to reactivate Unlock Mode 🔴
 
+Restart Steam again and you're all set! 🚀
