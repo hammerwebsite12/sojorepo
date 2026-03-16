@@ -1,5 +1,5 @@
-🛠️ STEAM FIX: Purchase Errors & Missing Games (Hammer 3.4) 🚀
-If you’re seeing purchase errors or your library looks empty, follow these quick steps to get back in the game!
+🛠️ STEAM FIX 3/17/26 : Purchase Errors & Missing Games (Hammer 3.4) 🚀
+If you’re seeing purchase errors or your library looks empty
 Follow these steps exactly:
 1️⃣ Unlock Mode: Open Hammer 3.4 and click UNLOCK MODE 2.
 (If an error message or window pops up, just ignore it and close that window.)
