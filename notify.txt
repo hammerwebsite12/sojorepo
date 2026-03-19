@@ -1,19 +1,11 @@
 Gemini said
 🛠️ STEAM FIX 3/17/26 : Purchase Errors & Missing Games (Hammer 3.4) 🚀
-
 If you’re seeing purchase errors or your library looks empty, follow these steps exactly:
-
-Unlock Mode: Open Hammer 3.4 and click UNLOCK MODE 2.
+1 Unlock Mode: Open Hammer 3.4 and click UNLOCK MODE 2.
 (Ignore and close any error pop-ups.)
-
-Exit: Close the Hammer app completely.
-
-Run as Admin: Re-open Hammer (Right-click icon > Run as Administrator). 🛡️
-
-Re-Activate: Click the Red Circle to activate UNLOCK MODE again.
-
-Clear Cache (If needed): Still bugged? Go to Steam > Settings > Downloads > Clear Download Cache. 💡
-
+2 Exit: Close the Hammer app completely.
+3 Run as Admin: Re-open Hammer (Right-click icon > Run as Administrator). 🛡️
+4 Re-Activate: Click the Red Circle to activate UNLOCK MODE again.
+5 Clear Cache (If needed): Still bugged? Go to Steam > Settings > Downloads > Clear Download Cache. 💡
 Finish: Click Restart Steam. Your games should now be visible! ✅
-
 📺 NEED HELP? Watch the tutorial: https://streamable.com/adt2am
