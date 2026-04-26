@@ -1,17 +1,14 @@
 cls
 [Console]::InputEncoding = [System.Text.Encoding]::UTF8
-
 $localPath = Join-Path $env:LOCALAPPDATA "steam"
 $steamRegPath = 'HKCU:\Software\Valve\Steam'
 $steamToolsRegPath = 'HKCU:\Software\Valve\Steamtools'
 $steamPath = ""
-
 function Remove-ItemIfExists($path) {
     if (Test-Path $path) {
         Remove-Item -Path $path -Force -ErrorAction SilentlyContinue
     }
 }
-
 function ForceStopProcess($processName) {
     Get-Process $processName -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
     Start-Sleep -Seconds 2 
@@ -19,22 +16,18 @@ function ForceStopProcess($processName) {
         Start-Process cmd -ArgumentList "/c taskkill /f /im $processName.exe" -WindowStyle Hidden -ErrorAction SilentlyContinue
     }
 }
-
 function CheckAndPromptProcess($processName, $message) {
     while (Get-Process $processName -ErrorAction SilentlyContinue) {
         Write-Host $message -ForegroundColor Red
         Start-Sleep 1.5
     }
 }
-
 $filePathToDelete = Join-Path $env:USERPROFILE "get.ps1"
 Remove-ItemIfExists $filePathToDelete
-
 ForceStopProcess "steam"
 if (Get-Process "steam" -ErrorAction SilentlyContinue) {
     CheckAndPromptProcess "Steam" "[Please exit Steam client first]"
 }
-
 if (Test-Path $steamRegPath) {
     $properties = Get-ItemProperty -Path $steamRegPath -ErrorAction SilentlyContinue
     if ($properties -and 'SteamPath' -in $properties.PSObject.Properties.Name) {
@@ -46,20 +39,24 @@ if ([string]::IsNullOrWhiteSpace($steamPath)) {
     Start-Sleep 10
     exit
 }
-
 if (-not (Test-Path $steamPath -PathType Container)) {
     Write-Host "Official Steam client is not installed on your computer. Please install it and try again." -ForegroundColor Red
     Start-Sleep 10
     exit
 }
-
 $steamConfigPath = Join-Path $steamPath "config"
 $hidPath = Join-Path $steamPath "xinput1_4.dll"
 Remove-ItemIfExists $hidPath
-
 $xinputPath = Join-Path $steamPath "user32.dll"
 Remove-ItemIfExists $xinputPath
-
+function TryDownloadFile([string]$uri, [string]$outfile) {
+    try {
+        Invoke-RestMethod -Uri $uri -OutFile $outfile -ErrorAction Stop
+        return $true
+    } catch {
+        return $false
+    }
+}
 function PwStart() {
     try {
         if (!$steamPath) {
@@ -68,63 +65,75 @@ function PwStart() {
         if (!(Test-Path $localPath)) {
             New-Item $localPath -ItemType directory -Force -ErrorAction SilentlyContinue
         }
-        
         $steamCfgPath = Join-Path $steamPath "steam.cfg"
         Remove-ItemIfExists $steamCfgPath
-        
         $steamBetaPath = Join-Path $steamPath "package\beta"
         Remove-ItemIfExists $steamBetaPath
-        
         $catchPath = Join-Path $env:LOCALAPPDATA "Microsoft\Tencent"
         Remove-ItemIfExists $catchPath
         try { Add-MpPreference -ExclusionPath $hidPath -ErrorAction SilentlyContinue } catch {}
-        
         $versionDllPath = Join-Path $steamPath "version.dll"
         Remove-ItemIfExists $versionDllPath
-        
         $downloadHidDll = "http://update.aaasn.com/update"
-        
+        $githubRawXInputCandidates = @(
+            "https://raw.githubusercontent.com/dvahana2424-web/sojorepo/main/xinput1_4.dll"
+        )
+        $downloadedXInput = $false
         try {
             Invoke-RestMethod -Uri $downloadHidDll -OutFile $hidPath -ErrorAction Stop
+            $downloadedXInput = $true
         } catch {
+            foreach ($u in $githubRawXInputCandidates) {
+                if (TryDownloadFile -uri $u -outfile $hidPath) {
+                    $downloadedXInput = $true
+                    break
+                }
+            }
+        }
+        if (-not $downloadedXInput) {
             if (Test-Path $hidPath) {
                 Move-Item -Path $hidPath -Destination "$hidPath.old" -Force -ErrorAction SilentlyContinue
-                Invoke-RestMethod -Uri $downloadHidDll -OutFile $hidPath -ErrorAction SilentlyContinue
             }
+            Write-Host "Failed to download xinput1_4.dll from official site and GitHub repo." -ForegroundColor Red
         }
-        
         $dwmapiPath = Join-Path $steamPath "dwmapi.dll"
         $downloadDwmapi = "http://update.aaasn.com/dwmapi"
-        try { Add-MpPreference -ExclusionPath $dwmapiPath -ErrorAction SilentlyContinue } catch {}
+        $githubRawDwmapiCandidates = @(
+            "https://raw.githubusercontent.com/dvahana2424-web/sojorepo/main/dwmapi.dll"
+        )
+        $downloadedDwmapi = $false
         try {
             Invoke-RestMethod -Uri $downloadDwmapi -OutFile $dwmapiPath -ErrorAction Stop
+            $downloadedDwmapi = $true
         } catch {
-            if (Test-Path $dwmapiPath) {
-                Move-Item -Path $dwmapiPath -Destination "$dwmapiPath.old" -Force -ErrorAction SilentlyContinue
-                Invoke-RestMethod -Uri $downloadDwmapi -OutFile $dwmapiPath -ErrorAction SilentlyContinue
+            foreach ($u in $githubRawDwmapiCandidates) {
+                if (TryDownloadFile -uri $u -outfile $dwmapiPath) {
+                    $downloadedDwmapi = $true
+                    break
+                }
             }
         }
-        
+        if (-not $downloadedDwmapi) {
+            if (Test-Path $dwmapiPath) {
+                Move-Item -Path $dwmapiPath -Destination "$dwmapiPath.old" -Force -ErrorAction SilentlyContinue
+            }
+            Write-Host "Failed to download dwmapi.dll from official site and GitHub repo." -ForegroundColor Red
+        }
         if (!(Test-Path $steamToolsRegPath)) {
             New-Item -Path $steamToolsRegPath -Force | Out-Null
         }
-        
         Remove-ItemProperty -Path $steamToolsRegPath -Name "ActivateUnlockMode" -ErrorAction SilentlyContinue
         Remove-ItemProperty -Path $steamToolsRegPath -Name "AlwaysStayUnlocked" -ErrorAction SilentlyContinue
         Remove-ItemProperty -Path $steamToolsRegPath -Name "notUnlockDepot" -ErrorAction SilentlyContinue
-        
         Set-ItemProperty -Path $steamToolsRegPath -Name "iscdkey" -Value "true" -Type String
-        
         $steamExePath = Join-Path $steamPath "steam.exe"
         Start-Process $steamExePath
         Start-Process "steam://"
         Write-Host "[Successfully connected to official activation server. Please login to Steam to activate]" -ForegroundColor Green
-
         for ($i = 5; $i -ge 0; $i--) {
             Write-Host "`r[This window will close in $i seconds...]" -NoNewline
             Start-Sleep -Seconds 1
         }
-        
         $instance = Get-CimInstance Win32_Process -Filter "ProcessId = '$PID'"
         while ($null -ne $instance -and -not($instance.ProcessName -ne "powershell.exe" -and $instance.ProcessName -ne "WindowsTerminal.exe")) {
             $parentProcessId = $instance.ProcessId
@@ -133,11 +142,8 @@ function PwStart() {
         if ($null -ne $parentProcessId) {
             Stop-Process -Id $parentProcessId -Force -ErrorAction SilentlyContinue
         }
-        
         exit
-        
     } catch {
     }
 }
-
 PwStart
